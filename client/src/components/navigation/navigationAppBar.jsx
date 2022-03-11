@@ -88,12 +88,6 @@ const ResponsiveAppBar = () => {
                 <Typography textAlign="center">
                 </Typography>
               </MenuItem>
-              
-              <MenuItem key= "add" onClick={handleCloseNavMenu} component={Link} to="/addplant">
-                <Typography textAlign="center">
-                </Typography>
-              </MenuItem>
-
             </Menu>
           </Box>
           <Typography
@@ -133,20 +127,6 @@ const ResponsiveAppBar = () => {
               >
                Green House
             </Button>
-
-            <Button
-                key= "add"
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                component={Link}
-                to="/addplant"
-              >
-               Add Friend
-            </Button>
-
-
-
-
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

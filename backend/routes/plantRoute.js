@@ -1,20 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Plant = require("../models/plantMod");
-
-//
-router.route("/addplant").post((req, res) => {
-    const title = req.body.title;
-    const content = req.body.content;
-    const newPlant = new Plant({
-        title,
-        content
-    });
-    newPlant.save();
-    var msg = "title: " + title + " content:" + content;
-    res.send(msg);
-})
+const plantController = require('../controllers/plantController')
 
 
-
+router.route("/addplant").post(plantController.plant_create);
+router.route("/greenhouse").get(plantController.plant_display)
 module.exports = router;
