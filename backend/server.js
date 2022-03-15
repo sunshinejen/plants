@@ -12,6 +12,7 @@ app.use(express.json());
 app.use("/", plantRoutes);
 
 
+//database configuration 
 require("dotenv").config({ path: "./config.env" });
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
