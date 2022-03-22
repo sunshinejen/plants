@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -9,20 +8,15 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import Paper from '@mui/material/Paper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faDog, faCat} from '@fortawesome/free-solid-svg-icons'
-import { styled } from '@mui/material/styles';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDog, faCat } from '@fortawesome/free-solid-svg-icons';
+import { useForm, Controller } from "react-hook-form";
 
 function AddPlant() { 
 
 
-    const [input, setInput] = useState({
-        title: '',
-        content: '',
-        toxicK9: '',
-        toxicFel: ''
-    });
+    const [input, setInput] = useState('');
+   // const { handleSubmit, control } = useForm();
 
     
 
@@ -65,10 +59,9 @@ function AddPlant() {
             border: "1px solid black"
         }}
         >
-        <form on onSubmit={handleClick}>
-            <Grid container direction="column" justifyContent="center" alignItems="stretch" >
-                <Grid item spacing={4}>
-                    <TextField
+        <form onSubmit={handleClick}>
+                <FormControl>
+                <TextField
                         fullWidth
                         id="plant-name-input"
                         name= "title"
@@ -77,23 +70,23 @@ function AddPlant() {
                         value={input.title}
                         onChange={handleChange}
                     />
-                </Grid>
-                <Grid item rowSpacing={4}>
-                    <TextField
-                        fullWidth
-                        id="filled-multiline-flexible"
-                        name= "content"
-                        label="Notes on your friend"
-                        placeholder="Notes on your friend"
-                        multiline
-                        variant="filled"
-                        value={input.content}
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item rowSpacing={4}>
-                    <FormControl>
-                        <FormLabel>Is this toxic to dogs? <FontAwesomeIcon icon={faDog} /></FormLabel>
+                
+                        <TextField
+                            fullWidth
+                            id="filled-multiline-flexible"
+                            name="content"
+                            margin="dense"
+                            label="Notes on your friend"
+                            placeholder="Notes on your friend"
+                            multiline
+                            variant="filled"
+                            value={input.content}
+                            //error={!!error}
+                            //helperText={error ? error.message : null}
+                            onChange={handleChange}
+                            focused
+                            />
+                    <FormLabel>Is this toxic to dogs? <FontAwesomeIcon icon={faDog} /></FormLabel>
                         <RadioGroup
                             name="toxicK9"
                             value={input.toxicK9}
@@ -119,11 +112,7 @@ function AddPlant() {
                             />
 
                         </RadioGroup>
-                    </FormControl>
-                </Grid>
-                <Grid item>
-                    <FormControl>
-                        <FormLabel>Is this toxic to cats? <FontAwesomeIcon icon={faCat} /></FormLabel>
+                    <FormLabel>Is this toxic to cats? <FontAwesomeIcon icon={faCat} /></FormLabel>
                         <RadioGroup
                             name="toxicFel"
                             value={input.toxicFel}
@@ -133,13 +122,13 @@ function AddPlant() {
                                 key="yes"
                                 value="yes"
                                 control={<Radio size="medium" />}
-                                label="yes"
+                                label="Yes"
                             />
                             <FormControlLabel
                                 key="no"
                                 value="no"
                                 control={<Radio size="medium" />}
-                                label="no"
+                                label="No"
                             />
                             <FormControlLabel
                                 key="unknown"
@@ -148,12 +137,10 @@ function AddPlant() {
                                 label="unknown"
                             />
                         </RadioGroup>
-                    </FormControl>
-                </Grid>
-                <Button variant="contained" color="primary" type="submit" onClick={handleClick}>
+                <Button variant="contained" color="primary" type="submit">
                     Submit
                 </Button>
-            </Grid>
+            </FormControl>
         </form>
     </Paper>
     )
