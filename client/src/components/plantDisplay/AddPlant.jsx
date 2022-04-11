@@ -14,21 +14,21 @@ import { useForm, Controller } from "react-hook-form";
 
 function AddPlant() { 
 
-
-    const [input, setInput] = useState('');
-   // const { handleSubmit, control } = useForm();
-
+    const { handleSubmit, control } = useForm();
     
+    const [input, setInput] = useState('');
+   
+     function handleChange(event) {
+         const { name, value } = event.target;
+         setInput(prevInput => {
+             return {
+                 ...prevInput,
+                 [name]: value
+             }
+         })
+     }
 
-    function handleChange(event) {
-        const { name, value } = event.target;
-        setInput(prevInput => {
-            return {
-                ...prevInput,
-                [name]: value
-            }
-        })
-    }
+ 
 
     function handleClick(event) {
         event.preventDefault();
@@ -59,16 +59,25 @@ function AddPlant() {
             border: "1px solid black"
         }}
         >
-        <form onSubmit={handleClick}>
-                <FormControl>
-                <TextField
+        <form onSubmit={handleSubmit(handleClick)}>
+            <FormControl margin="dense">
+               <Controller 
+                    name="title"
+                    control={control}
+                    render={({ field: { handleChange, value }, fieldState: { error } }) => (
+                    <TextField
                         fullWidth
-                        id="plant-name-input"
-                        name= "title"
+                        id="component-outlined"
+                        placeholder=" Plant Friend Name"
+                        name="title"
                         label="Name"
-                        type="text"
-                        value={input.title}
+                        margin="dense"
+                        value={value}
                         onChange={handleChange}
+                        focused
+                    />        
+                    )}
+                        rules={{ required: 'Plant Name required' }}
                     />
                 
                         <TextField
@@ -81,8 +90,6 @@ function AddPlant() {
                             multiline
                             variant="filled"
                             value={input.content}
-                            //error={!!error}
-                            //helperText={error ? error.message : null}
                             onChange={handleChange}
                             focused
                             />
