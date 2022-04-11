@@ -22,18 +22,15 @@ git clone https://github.com/sunshinejen/plants.git
 ```
 - Navigate to client folder
     ```bash 
-    cd client
-
     npm install
     ```
+    
 
 - Navigate to backend folder
     ```bash 
-    cd backend
-
     npm install 
     ```
-- In the backend directory Start React App & server with concurrently, simply run: 
+- In the backend directory start React App & server with concurrently, simply run: 
     ```bash 
     npm start
     ```
